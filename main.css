@@ -1,5 +1,16 @@
 body {
-  background: #293f50;
+  background: #3A467E;
   color: #888;
   font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tweets {
+  border: 3px solid black;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: .5px;
+  margin: 10px auto;
+  width: 600px;
 }
