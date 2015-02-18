@@ -1,33 +1,5 @@
 
-$(document).ready(function(){
-  var $body = $('body');
-  $body.html('');
-
-  var index = streams.home.length - 1;
-  while(index >= 0){
-    var tweet = streams.home[index];
-    var $tweet = $('<div></div>');
-    $tweet.text('@' + tweet.user + ': ' + tweet.message);
-    $tweet.appendTo($body);
-    index -= 1;
-  }
-
-});
-
-
 var time = Date.now();
-
-$(document).ready(function(){
-  var index = streams.home.length;
-  
-  for(var i = 0; i < index; i++){
-    var source = streams.home[index].message;
-    time.appendTo(source);
-
-    
-  }
-})
-
 
 /*
  Inspiration from https://gist.github.com/2660489.git
@@ -39,7 +11,7 @@ function timeStamp() {
   var now = new Date();
  
 // Create an array with the current month, day and time
-  var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
+  var date = [ now.getMonth() + 1, now.getDate() ];
  
 // Create an array with the current hour, minute and second
   var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
@@ -63,3 +35,37 @@ function timeStamp() {
 // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
 }
+
+$(document).ready(function(){
+  var $body = $('body');
+  $body.html('');
+
+  var index = streams.home.length - 1;
+  while(index >= 0){
+    var tweet = streams.home[index];
+    var $tweet = $('<div class="tweets"></div>');
+    $tweet.text('@' + tweet.user + ': ' + tweet.message +
+      " Posted on: " + timeStamp(time));
+    $tweet.appendTo($body);
+    index -= 1;
+  }
+
+});
+
+var addNewestTweets = function(){
+  setInterval(function(){
+    var $body = $('body');
+    $body.html('');
+
+    var index = streams.home.length - 1;
+    while(index >= 0){
+      var tweet = streams.home[index];
+      var $tweet = $('<div class="tweets"></div>');
+      $tweet.text('@' + tweet.user + ': ' + tweet.message +
+        " Posted on: " + timeStamp(time));
+      $tweet.appendTo($body);
+      index -= 1;
+    }
+  }, 8000);
+};
+addNewestTweets();
