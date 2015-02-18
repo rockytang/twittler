@@ -6,7 +6,16 @@
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
+    <p class="test"> what time is it?</p>
+    
     <script>
+
+      var time = jQuery.now();
+
+      $(document).ready(function(){
+        $("streams.home").text(time);
+      })
+
 
       $(document).ready(function(){
         var $body = $('body');
