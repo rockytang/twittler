@@ -3,35 +3,16 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="application.js"></script>
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <p class="test"> what time is it?</p>
-    
-    <script>
+  	<header>
+  		<h1 class= "home"> <a href= "index.html"> Twittler </a> </h1>
+  		<p class= "update"> View new tweets </p>
+  	</header>
+  	<section>
+  	</section>
 
-      var time = jQuery.now();
-
-      $(document).ready(function(){
-        $("streams.home").text(time);
-      })
-
-
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-
-      });
-
-    </script>
   </body>
 </html>
