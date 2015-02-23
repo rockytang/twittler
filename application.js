@@ -1,5 +1,7 @@
 
-/* $(document).ready(function(){
+var alreadyShown = 0;
+
+$(document).ready(function(){
   //var $body = $('body');
   //$body.html('');
   var $section = $('section');
@@ -12,60 +14,60 @@
     var $tweet = $('<div class="tweets"></div>');
 
     $tweet.html( "<p>" + 
-      "<a href=streams.users[tweet.user]>" + '@' + tweet.user + "</a>" + ': ' + tweet.message +
-      "<br> <span class='postedTime'> Posted on: " + timeStamp(time) + "</span> </p>");
+      "<a class='user' >" + '@' + tweet.user + "</a>" + ': ' + tweet.message +
+      "<br> <span class='postedTime'> Posted on: " + timeStamp(tweet.created_at) + "</span> </p>");
 //streams.users.shawndrost has all of shawndrost's tweets
     $tweet.appendTo($section);
     index -= 1;
-  }  
-}); */
+    alreadyShown += 1;
+  }
+}); 
+
 
 $(document).ready(function(){
-  //var $body = $('body');
-  //$body.html('');
-  var $section = $('section');
-  $section.html('');
+  $(".user").on('click', function(){
+  //$(document).ready(function(){
+    //var $body = $('body');
+    //$body.html('');
+    var $section = $('section');
+    $section.html('');
 
-  var index = streams.users.shawndrost.length - 1;
+    var index = streams.users.shawndrost.length - 1;
 
-  while(index >= 0){
-    var tweet = streams.users.shawndrost[index];
-    var $tweet = $('<div class="tweets"></div>');
+    while(index >= 0){
+      var tweet = streams.users.shawndrost[index];
+      var $tweet = $('<div class="tweets"></div>');
 
-    $tweet.html( "<p>" + 
-      "<a href=streams.users[tweet.user]>" + '@' + tweet.user + "</a>" + ': ' + tweet.message +
-      "<br> <span class='postedTime'> Posted on: " + timeStamp(time) + "</span> </p>");
-//streams.users.shawndrost has all of shawndrost's tweets
-    $tweet.appendTo($section);
-    index -= 1;
-  }  
+      $tweet.html( "<p>" + 
+        "<a href=streams.users[tweet.user]>" + '@' + tweet.user + "</a>" + ': ' + tweet.message +
+        "<span class='postedTime'> Posted on: " + tweet.created_at + "</span> </p>");
+  //streams.users.shawndrost has all of shawndrost's tweets
+      $tweet.appendTo($section);
+      index -= 1;
+    }  
+  });
 });
 
-var addNewestTweets = function(){
-    setInterval(function(){
-      var $body = $('body');
-      //$body.html('');
-      var index = updatedIndex - 1;
+$(document).ready(function(){
+  $(".update").on('click', function(){
+    var $section = $('section');
+    var index = streams.home.length - 1;
+    var index2 = streams.home.length - 1;
 
-      var updatedIndex = streams.home.length - 1;
+    while(index >= alreadyShown) {
+      var tweet = streams.home[index];
+      var $tweet = $('<div class="tweets"></div>');
+      $tweet.html('@' + tweet.user + ': ' + tweet.message +
+        " Posted on: " + timeStamp(tweet.created_at));
+      $tweet.prependTo($section);
+      index -= 1;
+    };
 
-      while(updatedIndex > index) {
-        var tweet = streams.home[updatedIndex];
-        var $tweet = $('<div class="tweets"></div>');
-        $tweet.html('@' + tweet.user + ': ' + tweet.message +
-          " Posted on: " + timeStamp(time));
-        $tweet.prependTo($body);
-        index -= 1;
-      };
-      index = updatedIndex;
-    }, 2000);
-  };
+    alreadyShown = index2;
+    
+  });
+});
 
-//addNewestTweets();
-//to add back later
-
-
-var time = Date.now();
 
 /*
  Inspiration from https://gist.github.com/2660489.git
